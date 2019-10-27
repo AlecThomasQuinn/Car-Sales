@@ -1,11 +1,12 @@
 import React from 'react';
-
 import { connect } from "react-redux";
 
 import Header from './components/Header';
 import AddedFeatures from './components/AddedFeatures';
 import AdditionalFeatures from './components/AdditionalFeatures';
 import Total from './components/Total';
+
+import { addFeature } from './Actions/actions'
 
 const App = (props) => {
 
@@ -16,7 +17,7 @@ const App = (props) => {
   };
 
   const buyItem = item => {
-    // dipsatch an action here to add an item
+    props.addFeature(item.id)
   };
 
   return (
@@ -35,7 +36,6 @@ const App = (props) => {
 
 function mapStateToProps(state) {
   console.log('mapStateToProps state:', state.reducer)
-  // I have no idea why I have to make 
   return {
     additionalPrice: state.reducer.additionalPrice,
     car: state.reducer.car,
@@ -43,12 +43,11 @@ function mapStateToProps(state) {
   };
 }
 
-// const matchDispatchToProps = {
-//   // updateTitle,
-//   // toggleEditing
-// };
+const matchDispatchToProps = {
+  addFeature
+};
 
 export default connect(
   mapStateToProps,
- // matchDispatchToProps
+  matchDispatchToProps
 )(App);
